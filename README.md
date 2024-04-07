@@ -58,6 +58,6 @@ cmake --build .
 
 or
 ```Bash
-.\build.bat
+./build.bat
 ```
 
