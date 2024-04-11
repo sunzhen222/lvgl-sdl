@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.14)
 project(lvgl-sdl LANGUAGES C CXX)
 
 find_package(PkgConfig)
+find_package(SDL2 REQUIRED)
 pkg_check_modules(SDL2 REQUIRED sdl2)
 
 set(PROJECT_DIR "${CMAKE_SOURCE_DIR}")
@@ -39,10 +40,10 @@ set(objsrc
 
 add_executable(lvgl-sdl ${objsrc})
 
-include(${LVGL_DIR}/CMakeLists.txt)
+add_subdirectory(${LVGL_DIR})
 
 target_include_directories(lvgl-sdl PUBLIC ${SDL2_INCLUDE_DIRS})
 target_compile_options(lvgl-sdl PUBLIC ${SDL2_CFLAGS_OTHER})
-target_link_libraries(lvgl-sdl ${SDL2_LIBRARIES} lvgl::lvgl lvgl::demos SDL2)
+target_link_libraries(lvgl-sdl lvgl::demos SDL2::SDL2)
 
 
