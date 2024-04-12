@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
+MESSAGE(STATUS "os: ${CMAKE_HOST_SYSTEM_NAME}")
+
 project(lvgl-sdl LANGUAGES C CXX)
 
 find_package(PkgConfig)
@@ -44,6 +46,9 @@ add_subdirectory(${LVGL_DIR})
 
 target_include_directories(lvgl-sdl PUBLIC ${SDL2_INCLUDE_DIRS})
 target_compile_options(lvgl-sdl PUBLIC ${SDL2_CFLAGS_OTHER})
-target_link_libraries(lvgl-sdl lvgl::demos SDL2::SDL2)
 
-
+if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
+    target_link_libraries(lvgl-sdl ${SDL2_LIBRARIES} lvgl::lvgl lvgl::demos SDL2)
+else()
+    target_link_libraries(lvgl-sdl lvgl::demos SDL2::SDL2)
+endif()
