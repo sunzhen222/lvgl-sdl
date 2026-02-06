@@ -15,9 +15,7 @@ set(SIMULATOR_DIR "${SOURCE_DIR}/simulator")
 set(SIMULATOR_LVDRV_DIR "${SIMULATOR_DIR}/lvgl_drv")
 
 
-set(LV_CONF_PATH ${PROJECT_DIR}/src/simulator/lv_conf.h CACHE STRING "" FORCE)
-add_definitions(-DLV_LVGL_H_INCLUDE_SIMPLE)
-add_definitions(-DLV_CONF_PATH=${LV_CONF_PATH})
+set(LV_BUILD_CONF_DIR "${PROJECT_DIR}/src/simulator" CACHE STRING "" FORCE)
 
 include_directories(${PROJECT_DIR})
 include_directories(${LVGL_DIR})
@@ -46,6 +44,8 @@ add_subdirectory(${LVGL_DIR})
 
 target_include_directories(lvgl-sdl PUBLIC ${SDL2_INCLUDE_DIRS})
 target_compile_options(lvgl-sdl PUBLIC ${SDL2_CFLAGS_OTHER})
+
+add_definitions(-DLV_LVGL_H_INCLUDE_SIMPLE)
 
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
     target_link_libraries(lvgl-sdl ${SDL2_LIBRARIES} lvgl::lvgl lvgl::demos SDL2)
