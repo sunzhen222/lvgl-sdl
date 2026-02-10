@@ -38,7 +38,7 @@ pacman -S mingw-w64-x86_64-SDL2
 ## Step 3. Clone repository
 ### Clone
 ```Bash
-git clone git@github.com:sunzhen222/lvgl-sdl.git
+git clone https://github.com/sunzhen222/lvgl-sdl.git
 cd lvgl-sdl
 ```
 ### lvgl Submodule
