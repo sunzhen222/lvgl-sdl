@@ -44,22 +44,25 @@ int main(int argc, char *argv[])
             }
         }
         lv_timer_handler();
-        SDL_Delay(10);
+        SDL_Delay(1);
     }
     return 0;
 }
-
-
 
 static int TickThread(void *data)
 {
+    uint32_t last = SDL_GetTicks();
     while (1) {
-        lv_tick_inc(5);
-        SDL_Delay(5);
+        uint32_t now = SDL_GetTicks();
+        uint32_t delta = now - last;
+        if (delta > 0) {
+            lv_tick_inc(delta);
+            last = now;
+        }
+        SDL_Delay(1);
     }
     return 0;
 }
-
 
 static void PlayDemo(void)
 {
